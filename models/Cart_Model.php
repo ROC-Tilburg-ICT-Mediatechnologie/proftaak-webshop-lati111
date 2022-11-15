@@ -15,6 +15,14 @@ class Cart_Model extends Model
         return $this->select('SELECT * FROM cart');
     }
 
+    public function getCart($temphash)
+    {
+        return $this->select("SELECT * FROM cart 
+            INNER JOIN product ON product.idproduct = cart.idproduct
+            WHERE temphash = '$temphash'
+            ");
+    }
+
     public function addItem(array $arr){
         if (isset($arr['idproduct'], $arr['quantity'], $arr['temphash'])) {
             return $this->insert(

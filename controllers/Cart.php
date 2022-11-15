@@ -16,7 +16,10 @@ class Cart extends AbstractView
 
     public function show()
     {
-        $this->items = $this->c_model->listItems();
+        $temphash = (isset($_SESSION['temphash'])) ? $_SESSION['temphash']
+        : $this->createTempUSerId();
+
+        $this->items = $this->c_model->getCart($temphash);
         $this->showView('cart', ['items' => $this->items]);
     }
 

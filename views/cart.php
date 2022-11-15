@@ -8,7 +8,10 @@
 <h1>De inhoud van uw winkelwagentje</h1>
 <ul>
     <?php
-     // Hier de inhoud van de cart tonen
+        foreach ($items as $item) {
+        $price = ($item->quantity * $item->price) / 100;
+            echo "<li>$item->quantity x $item->name | € $price</li>";
+        }
     ?>
     <a href="index.php">Verder winkelen</a>
 </ul>

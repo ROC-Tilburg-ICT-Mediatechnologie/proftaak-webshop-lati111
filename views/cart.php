@@ -11,7 +11,10 @@
     <ul>
         <?php
         foreach ($items as $item) {
-            $price = ($item->quantity * $item->price) / 100;
+            $price = number_format(($item->quantity * $item->price) / 100, 2);
+            $price = str_replace(",", "-", $price);
+            $price = str_replace(".", ",", $price);
+            $price = str_replace("-", ".", $price);
             echo "<li>$item->quantity x $item->name | € $price</li>";
         }
         ?>

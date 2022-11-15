@@ -15,7 +15,7 @@ class Cart_Model extends Model
         return $this->select('SELECT * FROM cart');
     }
 
-    public function getCart($temphash)
+    public function getCart(string $temphash)
     {
         return $this->select("SELECT * FROM cart 
             INNER JOIN product ON product.idproduct = cart.idproduct
@@ -25,12 +25,26 @@ class Cart_Model extends Model
 
     public function addItem(array $arr){
         if (isset($arr['idproduct'], $arr['quantity'], $arr['temphash'])) {
-            return $this->insert(
-                "INSERT INTO cart (idproduct, quantity, temphash) VALUES ({$arr['idproduct']}, {$arr['quantity']}, '{$arr['temphash']}');"
-            );
+            $existingid = $this->itemExists($arr['temphash'], $arr['idproduct']);
+            if ($existingid === 0) {
+                return $this->insert(
+                    "INSERT INTO cart (idproduct, quantity, temphash) VALUES ({$arr['idproduct']}, {$arr['quantity']}, '{$arr['temphash']}');"
+                );
+            } else {
+                return $this->update(
+                    "UPDATE cart SET quantity = quantity + 1 WHERE idcart = $existingid"
+                );
+            }
         }
         throw new \Exception('Niet gelukt om het product toe te voegen aan het boodschappenwagentje.');
     }
+
+    // public function changeItemQuantity(int $idcart, int $changevalue):bool
+    // {
+    //     return $this->update(
+    //         "UPDATE cart SET quantity = quantity + $changevalue WHERE idcart = $idcart"
+    //     );
+    // }
 
     public function delItem(array $arr){
         if (isset($arr['idproduct'])) {
@@ -39,6 +53,12 @@ class Cart_Model extends Model
             );
         }
         throw new \Exception('Niet gelukt om het product te verwijderen uit het boodschappenwagentje.');
+    }
+
+    public function itemExists(string $temphash, int $idproduct): ?int {
+        return intval($this->select("SELECT idcart FROM cart 
+            WHERE temphash = '$temphash' AND idproduct = '$idproduct'
+            ")[0]->idcart);
     }
 
 

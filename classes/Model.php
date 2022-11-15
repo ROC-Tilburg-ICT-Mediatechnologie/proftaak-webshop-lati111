@@ -27,6 +27,11 @@ class Model
         return $this->DB->query($sql);
     }
 
+    protected function update($sql): bool
+    {
+        return $this->DB->query($sql);
+    }
+
     protected function del($sql): bool
     {
         return $this->DB->query($sql);

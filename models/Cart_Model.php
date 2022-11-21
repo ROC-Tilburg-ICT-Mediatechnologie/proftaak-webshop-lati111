@@ -39,12 +39,12 @@ class Cart_Model extends Model
         throw new \Exception('Niet gelukt om het product toe te voegen aan het boodschappenwagentje.');
     }
 
-    // public function changeItemQuantity(int $idcart, int $changevalue):bool
-    // {
-    //     return $this->update(
-    //         "UPDATE cart SET quantity = quantity + $changevalue WHERE idcart = $idcart"
-    //     );
-    // }
+    public function changeItemQuantity(int $idcart, int $changevalue, string $tempHash):bool
+    {
+        return $this->update(
+            "UPDATE cart SET quantity = (quantity + $changevalue) WHERE idcart = $idcart AND temphash = '$tempHash'"
+        );
+    }
 
     public function delItem(array $arr){
         if (isset($arr['idproduct'])) {

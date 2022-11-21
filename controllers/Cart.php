@@ -43,6 +43,21 @@ class Cart extends AbstractView
         }
     }
 
+    public function addQuantity(array $arr)
+    {
+        $idproduct = (isset($arr['id'])) ? $arr['id'] : false;
+        $temphash = (isset($_SESSION['temphash'])) ? $_SESSION['temphash']
+        : $this->createTempUSerId();
+
+        $this->items = $this->c_model->getCart($temphash);
+
+        if ($idproduct !== false) {
+            $this->c_model->changeItemQuantity($arr['id'], 1, $temphash);
+            // $message = "Artikel_aan_winkelmandje_toegevoegd";
+            $this->show();
+        }
+    }
+
     public function del(array $arr){
         $idproduct = (isset($arr['id'])) ? $arr['id'] : false;
         $arr = [

@@ -44,7 +44,9 @@
                 "<td><img src='img/items/product_{$item->idproduct}.webp'></td>" .
                 "<td><span class='product_name'>{$item->name}</span></td>" .
                 "<td><span class='product_description'>" .
-                "<button class='item_minus'>-</button> {$item->quantity} <button class='item_plus'>+</button>" .
+                "<a href='index.php?c=cart&m=removeQuantity&id={$item->idcart}'><button class='item_minus'>-</button></a> ".
+                "{$item->quantity}" .
+                "<a href='index.php?c=cart&m=addQuantity&id={$item->idcart}'><button class='item_add'>+</button></a> " .
                 "</span></td>" .
                 "<td><span class='product_price'>€ {$price}</span></td>" .
                 "<td><a href='index.php?c=cart&m=del&id={$item->idproduct}'><button>Verwijder uit winkelmandje</button></a></td>" .

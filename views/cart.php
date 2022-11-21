@@ -47,7 +47,7 @@
                 "<button class='item_minus'>-</button> {$item->quantity} <button class='item_plus'>+</button>" .
                 "</span></td>" .
                 "<td><span class='product_price'>€ {$price}</span></td>" .
-                // "<td><a href='index.php?c=cart&m=add&id={$item->idproduct}'>Voeg toe aan winkelmandje</a></td>" .
+                "<td><a href='index.php?c=cart&m=del&id={$item->idproduct}'><button>Verwijder uit winkelmandje</button></a></td>" .
                 "</tr>";
         }
         ?>

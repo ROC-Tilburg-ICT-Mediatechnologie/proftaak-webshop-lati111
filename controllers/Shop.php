@@ -10,9 +10,14 @@ class Shop extends AbstractView
     {
         $p_model = new Product_Model();
         $this->products = $p_model->listProducts();
-        // Verklaring regel hieronder: Open de view (shop.php) en vul de variabele $products die daar in voorkomt met $this->products
-        // Stuur die het resultaat vervolgens naar de client zodat de gebruiker de shop met producten te zien krijgt.
-        $this->showView('shop', ['products' =>$this->products]);
+        if (!isset($_GET["m"])) {
+            $this->showView('shop', ['products' => $this->products]);
+        }
     }
 
+    public function showMessage(array $args)
+    {
+        $message = str_replace("_", " ", $args["message"]);
+        $this->showView('shop', ['products' => $this->products, 'message' => $message]);
+    }
 }

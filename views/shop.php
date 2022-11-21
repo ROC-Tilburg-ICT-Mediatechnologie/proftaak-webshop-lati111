@@ -37,9 +37,6 @@
                 "<td><span class='product_price'>€ {$price}</span></td>" .
                 "<td><a href='index.php?c=cart&m=add&id={$product->idproduct}'>Voeg toe aan winkelmandje</a></td>".
                 "</tr>";
-
-            // echo "<li><a href='index.php?c=cart&m=add&id={$product->idproduct}'>{$product->name}</a>".
-            //     "<span>: {$product->description} | € {$price}</span></li>";
         }
         ?>
     </table>

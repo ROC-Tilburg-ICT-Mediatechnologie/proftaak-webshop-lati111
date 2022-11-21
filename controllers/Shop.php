@@ -17,6 +17,7 @@ class Shop extends AbstractView
 
     public function showMessage(array $args)
     {
-        $this->showView('shop', ['products' => $this->products, 'message' => $args["message"]]);
+        $message = str_replace("_", " ", $args["message"]);
+        $this->showView('shop', ['products' => $this->products, 'message' => $message]);
     }
 }

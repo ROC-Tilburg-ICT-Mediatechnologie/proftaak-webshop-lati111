@@ -38,7 +38,8 @@ class Cart extends AbstractView
 
         if ($idproduct !== false) {
             $this->c_model->addItem($arr);
-            $this->show();
+            $message = "Artikel_aan_winkelmandje_toegevoegd";
+            Header("Location: index.php?c=shop&m=showMessage&message={$message}");
         }
     }
 

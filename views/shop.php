@@ -57,7 +57,7 @@
             setTimeout(() => {
                 document.getElementById("message").remove();
                 window.history.pushState([], '', "index.php")
-            }, 2000);
+            }, 4000);
         }
     }
 </script>

@@ -27,12 +27,15 @@
     <div>
         <a href="index.php?c=cart&m=show">Bekijk winkelwagen</a>
     </div>
-    <table id="product_list">
-        <?php
+
+    <?php
         if (isset($message)) {
             echo "<div id='message'>{$message}</div>";
         }
-
+    ?>
+    
+    <table id="product_list">
+        <?php
         foreach ($products as $product) {
             $price = number_format($product->price / 100, 2);
             $price = str_replace(",", "-", $price);

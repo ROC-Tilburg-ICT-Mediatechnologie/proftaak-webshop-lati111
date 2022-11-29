@@ -44,7 +44,7 @@
                 "<td><img src='img/items/product_{$item->idproduct}.webp'></td>" .
                 "<td><span class='product_name'>{$item->name}</span></td>" .
                 "<td><span class='product_description'>" .
-                "<a href='index.php?c=cart&m=removeQuantity&id={$item->idcart}'><button class='item_minus'>-</button></a> ".
+                "<a href='index.php?c=cart&m=removeQuantity&id={$item->idcart}'><button class='item_minus'>-</button></a> " .
                 "{$item->quantity}" .
                 "<a href='index.php?c=cart&m=addQuantity&id={$item->idcart}'><button class='item_add'>+</button></a> " .
                 "</span></td>" .
@@ -63,7 +63,8 @@
 
     echo "<div><i>Subtotaal: € {$total}</i></div>";
     ?>
-    
+
+    <a href="index.php?c=cart&m=pay"><button>Betaal</button></a>
     <a href="index.php">Verder winkelen</a>
 </body>
 

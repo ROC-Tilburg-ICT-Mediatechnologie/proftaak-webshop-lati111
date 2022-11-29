@@ -83,6 +83,14 @@ class Cart extends AbstractView
         }
     }
 
+    public function pay() {
+        $temphash = (isset($_SESSION['temphash'])) ? $_SESSION['temphash']
+            : $this->createTempUSerId();
+
+        $this->items = $this->c_model->getCart($temphash);
+        $this->showView('pay', ['items' => $this->items]);
+    }
+
     private function createTempUserId()
     {
         $userid = password_hash(

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql:3306
--- Gegenereerd op: 14 jun 2020 om 10:31
--- Serverversie: 8.0.20
--- PHP-versie: 7.4.5
+-- Generation Time: Nov 29, 2022 at 10:50 AM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,67 +20,13 @@ SET time_zone = "+00:00";
 --
 -- Database: `webshop`
 --
-DROP DATABASE IF EXISTS `tomaat`;
-CREATE DATABASE IF NOT EXISTS `tomaat` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `tomaat`;
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user`
+-- Table structure for table `cart`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `iduser` int NOT NULL,
-  `name` varchar(254) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `role` int NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `user`
---
-
-INSERT INTO `user` (`iduser`, `name`, `email`, `password`, `role`) VALUES
-(1, 'Test account manager', 'manager@tomaat.nl', '1234', 2),
-(2, 'Test account medewerker', 'medewerker@tomaat.nl', '1234', 1),
-(3, 'Test account gast', 'gast@hotmail.com', '1234', 0);
-
---
--- Indexen voor geëxporteerde tabellen
---
-
---
--- Indexen voor tabel `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`iduser`);
-
---
--- AUTO_INCREMENT voor geëxporteerde tabellen
---
-
---
--- AUTO_INCREMENT voor een tabel `user`
---
-ALTER TABLE `user`
-  MODIFY `iduser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- Database: `webshop`
---
-DROP DATABASE IF EXISTS `webshop`;
-CREATE DATABASE IF NOT EXISTS `webshop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `webshop`;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `cart`
---
-
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `idcart` int NOT NULL,
   `temphash` varchar(254) NOT NULL,
@@ -89,19 +35,47 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `cart`
+-- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`idcart`, `temphash`, `idproduct`, `quantity`) VALUES
-(1, '$2y$10$5RB15ZrYLIsfttZzAf6BRuqhL6rj01nd0HL8FBwJ/tubKy05c.eFa', 1, 1);
+(1, '$2y$10$5RB15ZrYLIsfttZzAf6BRuqhL6rj01nd0HL8FBwJ/tubKy05c.eFa', 1, 1),
+(15, '$2y$10$Gv9ifQLBNZkvSd5IfmqKluHtAa8phZx5L6TVavXTydNI6R/EK5B36', 1, 7);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `product`
+-- Table structure for table `order`
 --
 
-DROP TABLE IF EXISTS `product`;
+CREATE TABLE `order` (
+  `ID` int NOT NULL,
+  `naam` varchar(60) NOT NULL,
+  `email` varchar(80) NOT NULL,
+  `phoneNumber` varchar(12) NOT NULL,
+  `address` varchar(254) NOT NULL,
+  `status` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_item`
+--
+
+CREATE TABLE `order_item` (
+  `ID` int NOT NULL,
+  `orderID` int NOT NULL,
+  `productID` int NOT NULL,
+  `quantity` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
 CREATE TABLE `product` (
   `idproduct` int NOT NULL,
   `name` varchar(254) NOT NULL,
@@ -111,7 +85,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `products`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`idproduct`, `name`, `description`, `stock`, `price`) VALUES
@@ -121,10 +95,9 @@ INSERT INTO `product` (`idproduct`, `name`, `description`, `stock`, `price`) VAL
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `iduser` int NOT NULL,
   `username` varchar(254) NOT NULL,
@@ -134,46 +107,99 @@ CREATE TABLE `user` (
   `tel` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- --------------------------------------------------------
+
 --
--- Indexen voor geëxporteerde tabellen
+-- Table structure for table `waardebon`
+--
+
+CREATE TABLE `waardebon` (
+  `code` varchar(20) NOT NULL,
+  `kortingSet` double DEFAULT NULL,
+  `KortingPercentage` int DEFAULT NULL,
+  `validUntil` date DEFAULT NULL,
+  `uses` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `waardebon`
+--
+
+INSERT INTO `waardebon` (`code`, `kortingSet`, `KortingPercentage`, `validUntil`, `uses`) VALUES
+('123431A', 25, NULL, NULL, 1),
+('76543B', NULL, 10, '2023-11-30', NULL),
+('98222V', 250, NULL, NULL, 1);
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`idcart`);
 
 --
--- Indexen voor tabel `products`
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `order_item`
+--
+ALTER TABLE `order_item`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`idproduct`);
 
 --
--- Indexen voor tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`iduser`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- Indexes for table `waardebon`
+--
+ALTER TABLE `waardebon`
+  ADD PRIMARY KEY (`code`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `idcart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idcart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT voor een tabel `products`
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_item`
+--
+ALTER TABLE `order_item`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `idproduct` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT voor een tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `iduser` int NOT NULL AUTO_INCREMENT;

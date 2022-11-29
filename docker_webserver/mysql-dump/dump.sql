@@ -128,7 +128,7 @@ CREATE TABLE `waardebon` (
 INSERT INTO `waardebon` (`code`, `kortingSet`, `KortingPercentage`, `validUntil`, `uses`) VALUES
 ('123431A', 25, NULL, NULL, 1),
 ('76543B', NULL, 10, '2023-11-30', NULL),
-('98222V', 250, NULL, NULL, 1);
+('98222V', 250, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables

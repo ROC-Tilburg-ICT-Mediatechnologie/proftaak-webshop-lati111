@@ -53,7 +53,20 @@ class Cart extends AbstractView
 
         if ($idproduct !== false) {
             $this->c_model->changeItemQuantity($arr['id'], 1, $temphash);
-            // $message = "Artikel_aan_winkelmandje_toegevoegd";
+            $this->show();
+        }
+    }
+
+    public function removeQuantity(array $arr)
+    {
+        $idproduct = (isset($arr['id'])) ? $arr['id'] : false;
+        $temphash = (isset($_SESSION['temphash'])) ? $_SESSION['temphash']
+        : $this->createTempUSerId();
+
+        $this->items = $this->c_model->getCart($temphash);
+
+        if ($idproduct !== false) {
+            $this->c_model->changeItemQuantity($arr['id'], -1, $temphash);
             $this->show();
         }
     }

@@ -2,7 +2,6 @@
 
 namespace webshop;
 
-
 class User_Model extends Model
 {
     public function __construct()
@@ -37,5 +36,43 @@ class User_Model extends Model
             }
         }
         return false;
+    }
+
+    public function getUser($username, $password)
+    {
+        $hashedPass = \password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $this->DB->prepare('SELECT * FROM user WHERE username = ? AND `password` = ?');
+        $stmt->bind_param('ss', $username, $hashedPass);
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        if ($results) {
+            return $results;
+        } else {
+            return "errror no results found";
+        }
+    }
+    public function isValidUser($username, $password): bool
+    {
+        $user = $this->getUser($username, $password);
+
+        if ($user['password'] === \password_hash($password, PASSWORD_DEFAULT))
+        {
+            return true;
+        } else {
+            return false;
+        }
+
+        
+    }
+
+    public function registerUser(string $username, string $password, string $name, string $tel, string $email)
+    {
+        $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $this->DB->prepare('INSERT INTO user (username, `password`, `name`, email, tel)');
+        $stmt->bind_param('sssss', $username, $hashedPass, $name, $tel, $email);
+        $stmt->execute();
     }
 }

@@ -8,8 +8,8 @@
 
 <!-- de action gaat naar de index, in de query string staat welke controller gerbuikt moet worden en welke method daarin uitgevoerd-->
 <form action="index.php?c=user&m=login" method="POST">
-    <label>username<input type="text" name="username" maxlength="40" placeholder="Email"/></label>
-    <label>password<input type="password" name="password" maxlength="32" placeholder="Wachtwoord"/></label>
+    <label>username<input type="text" name="username" maxlength="40" placeholder="Username"/></label><br>
+    <label>password<input type="password" name="password" maxlength="32" placeholder="Wachtwoord"/></label><br>
     <input type="submit" value="Inloggen">
 </form>
 </body>

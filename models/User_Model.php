@@ -53,16 +53,16 @@ class User_Model extends Model
             return "errror no results found";
         }
     }
-    public function isValidUser($username, $password): bool
+    public function isValidUser($username, $password) //bool
     {
         $user = $this->getUser($username, $password);
-
-        if ($user['password'] === \password_hash($password, PASSWORD_DEFAULT))
-        {
-            return true;
-        } else {
-            return false;
-        }
+        \var_dump($user->password);
+        // if ($user->password == \password_hash($password, PASSWORD_DEFAULT))
+        // {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
 
         
     }
@@ -71,7 +71,7 @@ class User_Model extends Model
     {
         $hashedPass = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->DB->prepare('INSERT INTO user (username, `password`, `name`, email, tel)');
+        $stmt = $this->DB->prepare('INSERT INTO user (username, `password`, `name`, email, tel) VALUES (?, ?, ?, ?, ?)');
         $stmt->bind_param('sssss', $username, $hashedPass, $name, $tel, $email);
         $stmt->execute();
     }

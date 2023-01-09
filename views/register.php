@@ -11,9 +11,9 @@
     <label for='username'>username</label><br>
     <input type="text" name="username" maxlength="40" required placeholder="Username"/><br>
     <label for='name'>name</label><br>
-    <input type="text" name="name" maxlength="45" required placeholder="Wachtwoord"/><br>
+    <input type="text" name="name" maxlength="45" required placeholder="name"/><br>
     <label for='email'>email</label><br>
-    <input type="email" name="email" maxlength="55" required placeholder="Wachtwoord"/><br>
+    <input type="email" name="email" maxlength="55" required placeholder="email"/><br>
     <label for='tel'>tel</label><br>
     <input type="tel" name="tel" required placeholder="tel"/><br>
     <label for='password'>password</label><br>

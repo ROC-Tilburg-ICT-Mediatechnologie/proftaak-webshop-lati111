@@ -30,9 +30,10 @@ class User extends AbstractView
             if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['repeat_password']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tel'])) {
                 if ($_POST['password'] == $_POST['repeat_password']) {
                     $userM->registerUser($_POST['username'], $_POST['password'], $_POST['name'], $_POST['tel'], $_POST['email']);
-                    header('index.php?c=user&m=showLogin');
+                    header('location: index.php?c=user&m=showLogin');
                 } else {
                     \header('location: index.php?c=user&m=showRegister&erro=1');
+                    
                 }
             } else {
                 \header('location: index.php?c=user&m=showRegister&erro=2');
@@ -53,9 +54,12 @@ class User extends AbstractView
                     $_SESSION['loggedin'] = true;
                     header('location: index.php?c=user&m=showDash');
                 } else {
-                    header("Location:index.php");
+                    // header("location: index.php?c=user&m=showLogin&error=1");
+                    \var_dump(password_hash("1234", PASSWORD_DEFAULT));
                 }
+            } else {header("location: index.php?c=user&m=showLogin&error=2");}
+            } else {
+                header("location: index.php?c=user&m=showLogin&error=3");
             }
         }
     }
-}

@@ -33,7 +33,6 @@ class User extends AbstractView
                     header('location: index.php?c=user&m=showLogin');
                 } else {
                     \header('location: index.php?c=user&m=showRegister&erro=1');
-                    
                 }
             } else {
                 \header('location: index.php?c=user&m=showRegister&erro=2');
@@ -54,12 +53,13 @@ class User extends AbstractView
                     $_SESSION['loggedin'] = true;
                     header('location: index.php?c=user&m=showDash');
                 } else {
-                    // header("location: index.php?c=user&m=showLogin&error=1");
-                    \var_dump(password_hash("1234", PASSWORD_DEFAULT));
+                    header("location: index.php?c=user&m=showLogin&error=1");
                 }
-            } else {header("location: index.php?c=user&m=showLogin&error=2");}
             } else {
-                header("location: index.php?c=user&m=showLogin&error=3");
+                header("location: index.php?c=user&m=showLogin&error=2");
             }
+        } else {
+            header("location: index.php?c=user&m=showLogin&error=3");
         }
     }
+}

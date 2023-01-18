@@ -51,6 +51,7 @@ class User extends AbstractView
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 if ($userM->isValidUser($_POST['username'], $_POST['password'])) {
                     $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $_POST['username'];
                     header('location: index.php?c=user&m=showDash');
                 } else {
                     header("location: index.php?c=user&m=showLogin&error=1");
@@ -61,5 +62,12 @@ class User extends AbstractView
         } else {
             header("location: index.php?c=user&m=showLogin&error=3");
         }
+    }
+
+    public function logout() {
+        \session_start();
+        unset($_SESSION['loggedin']);
+        unset($_SESSION['username']);
+        \header('location: index.php?c=user&m=showLogin');
     }
 }

@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    ?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -13,7 +17,9 @@
     <label for='password'>password</label><br>
     <input type="password" name="password" maxlength="32" placeholder="Wachtwoord"/></label><br>
     <input type="submit" value="Inloggen"><br>
-    <a href="index.php?c=user&m=showRegister">register</a>
+    <a href="index.php?c=user&m=showRegister">register</a><br>
+    <a href="index.php">back</a>
+    
 </form>
 </body>
 </html>

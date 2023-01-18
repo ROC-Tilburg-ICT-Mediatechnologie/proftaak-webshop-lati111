@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+
+if ($_SESSION['loggedin'] !== true ) 
+{
+    header('location: index.php?c=User&m=showLogin');
+}
 ?>
 
 
@@ -14,8 +19,11 @@ session_start();
 </head>
 <body>
     
+<h1>Welcome <?php echo $_SESSION['username']?> </h1>
 
+<a href="index.php?c=product&m=showAddProduct">Add new product</a><br>
+<a href="index.php?c=product&m=showProductList">List products</a><br>
 
-<a href="index.php/">Add new product</a>
+<a href="index.php?c=User&m=logout">logout</a>
 </body>
 </html>

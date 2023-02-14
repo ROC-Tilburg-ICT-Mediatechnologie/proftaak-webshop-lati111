@@ -28,4 +28,13 @@ class Product_Model extends Model
     {
         return $this->select('SELECT * FROM product');
     }
+
+    public function updateProduct($id, $name, $description, $price, $stock){
+        return $this->update("UPDATE product SET `name` = '$name', `description` = '$description', price = '$price', stock = '$stock' WHERE idproduct = '$id'");
+    }
+    
+    public function deleteProduct($id) {
+        return $this->del("DELETE FROM product WHERE idproduct = '$id'");
+    }
+
 }

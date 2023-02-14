@@ -25,6 +25,7 @@
 <body onload="init()">
     <h1>De shop</h1>
     <div>
+        <a href="index.php?c=user&m=showLogin">Login</a>
         <a href="index.php?c=cart&m=show">Bekijk winkelwagen</a>
     </div>
 
